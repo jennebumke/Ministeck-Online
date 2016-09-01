@@ -9,8 +9,30 @@ body
 form
 {
 	width:48%;
+	min-width: 900px;
 	margin:0 auto;
 	padding:1vh 1%;
 	height:98vh;
 	background-color: #fff;
+}
+
+form > *
+{
+	margin:1vh auto;
+	display: block;
+}
+
+form > div
+{
+	width: 180px;
+	text-align: center;
+}
+
+@media screen and (max-width: 920px)
+{
+	form
+	{
+		width: 98%;
+		min-width: auto;
+	}
 }

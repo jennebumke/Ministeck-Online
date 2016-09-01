@@ -12,10 +12,15 @@
 		<link href="css/style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
+		<script>
+		//initialize
+		
+		</script>
 		<form id="input" action="" method="POST">
 			<button type="file">Upload</button>
 			<div id="load">
 				<img src="load.gif">
+				<br>
 				<span id="process">0%</span>
 			</div>
 		</form>
