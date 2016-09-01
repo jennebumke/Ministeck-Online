@@ -11,7 +11,7 @@ var ministeckGenerator =
 	currentTries: 0,
 	useColorMapping: false,
 	oldPieces: [],
-	errorBlock: new ministeckBlock(0,0,14,false,false,false,false,new ministeckColor(0,0,0),new ministeckColor(0,0,0),canvas),
+	errorBlock: new ministeckBlock(0,0,14,false,false,false,false,new ministeckColor(0,0,0),new ministeckColor(0,0,0),this.canvas),
 	checkSymbols: function(data)
 	{
 		// check symbols in input document (using this.inputDoc)
@@ -55,15 +55,15 @@ var ministeckGenerator =
 	loadPieces: function()
 	{
 		// adds all ministeckPieceType's into the pieces array(this.Pieces)
-		this.pieces.push(new ministeckPiece(ministeckPieceTypes.block),new ministeckColor(0,0,0));
-		this.pieces.push(new ministeckPiece(ministeckPieceTypes.straight2),new ministeckColor(0,0,0));
-		this.pieces.push(new ministeckPiece(ministeckPieceTypes.block),new ministeckColor(0,0,0));
-		this.pieces.push(new ministeckPiece(ministeckPieceTypes.block),new ministeckColor(0,0,0));
-		this.pieces.push(new ministeckPiece(ministeckPieceTypes.block),new ministeckColor(0,0,0));
-		this.pieces.push(new ministeckPiece(ministeckPieceTypes.block),new ministeckColor(0,0,0));
-		this.pieces.push(new ministeckPiece(ministeckPieceTypes.block),new ministeckColor(0,0,0));
-		this.pieces.push(new ministeckPiece(ministeckPieceTypes.block),new ministeckColor(0,0,0));
-		this.pieces.push(new ministeckPiece(ministeckPieceTypes.block),new ministeckColor(0,0,0));
-		this.pieces.push(new ministeckPiece(ministeckPieceTypes.block),new ministeckColor(0,0,0));
+		this.pieces.push(new ministeckPiece(ministeckPieceTypes.block ,new ministeckColor(0,0,0)));
+		this.pieces.push(new ministeckPiece(ministeckPieceTypes.straight2,new ministeckColor(0,0,0)));
+		this.pieces.push(new ministeckPiece(ministeckPieceTypes.straight3,new ministeckColor(0,0,0)));
+		this.pieces.push(new ministeckPiece(ministeckPieceTypes.straight2down,new ministeckColor(0,0,0)));
+		this.pieces.push(new ministeckPiece(ministeckPieceTypes.straight3down,new ministeckColor(0,0,0)));
+		this.pieces.push(new ministeckPiece(ministeckPieceTypes.L,new ministeckColor(0,0,0)));
+		this.pieces.push(new ministeckPiece(ministeckPieceTypes.L2,new ministeckColor(0,0,0)));
+		this.pieces.push(new ministeckPiece(ministeckPieceTypes.L3,new ministeckColor(0,0,0)));
+		this.pieces.push(new ministeckPiece(ministeckPieceTypes.L4,new ministeckColor(0,0,0)));
+		this.pieces.push(new ministeckPiece(ministeckPieceTypes.fullblock,new ministeckColor(0,0,0)));
 	}
 }
