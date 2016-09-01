@@ -2,5 +2,15 @@ body
 {
 	margin:-13px 0 0;
 	padding: 13px 0 0;
+	height: 100vh;
+	background-color: #efefef;
 }
 
+form
+{
+	width:48%;
+	margin:0 auto;
+	padding:1vh 1%;
+	height:98vh;
+	background-color: #fff;
+}

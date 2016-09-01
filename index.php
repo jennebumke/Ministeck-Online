@@ -3,11 +3,11 @@
 ?>
 <html>
 	<head>
-		<script src="js/ministeckGenerator.js"></script>
 		<script src="js/ministeckBlock.js"></script>
 		<script src="js/ministeckPiece.js"></script>
 		<script src="js/ministeckColor.js"></script>
 		<script src="js/ministeckSymColorPair.js"></script>
+		<script src="js/ministeckGenerator.js"></script>
 		<title>Ministeck Online</title>
 		<link href="css/style.css" rel="stylesheet" type="text/css">
 	</head>
