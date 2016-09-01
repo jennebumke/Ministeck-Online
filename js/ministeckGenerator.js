@@ -80,3 +80,4 @@ var ministeckGenerator =
 		this.pieces.push(new ministeckPiece(ministeckPieceTypes.fullblock,new ministeckColor(0,0,0)));
 	}
 }
+ministeckGenerator.loadFile();
