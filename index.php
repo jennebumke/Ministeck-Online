@@ -8,6 +8,7 @@
 		<script src="js/ministeckColor.js"></script>
 		<script src="js/ministeckSymColorPair.js"></script>
 		<script src="js/ministeckGenerator.js"></script>
+		<script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
 		<title>Ministeck Online</title>
 		<link href="css/style.css" rel="stylesheet" type="text/css">
 	</head>
@@ -17,7 +18,7 @@
 		
 		</script>
 		<form id="input" action="" method="POST">
-			<button type="file">Upload</button>
+			<input type="file" name="Upload">
 			<div id="load">
 				<img src="load.gif">
 				<br>

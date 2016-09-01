@@ -36,3 +36,9 @@ form > div
 		min-width: auto;
 	}
 }
+
+input
+{
+	width: 108px;
+	outline: none;
+}
