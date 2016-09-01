@@ -14,7 +14,7 @@ var ministeckGenerator =
 	errorBlock: new ministeckBlock(0,0,14,false,false,false,false,new ministeckColor(0,0,0),new ministeckColor(0,0,0),this.canvas),
 	loadFile: function()
 	{
-		this.inputDoc = JSON.parse($("#inputDoc").val()).data;
+		this.inputDoc = $("#inputDoc").val().split(",");
 	},
 	checkSymbols: function(data)
 	{
