@@ -13,13 +13,17 @@
 		<link href="css/style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
-		<input type="hidden" name="inputDoc" value="">
+	<?php
+		$content = file_get_contents($_SERVER['DOCUMENT_ROOT']."/Ministeck-Online/Afbeelding - 2.txt");
+		echo '<input type="hidden" name="inputDoc" value='.json_encode(str_replace("\r\n", ",", $content)).'>';
+	?>
 		<script>
 		//initialize
 		
 		</script>
 		<form id="input" action="" method="POST">
-			<input type="file" name="Upload" id="input">
+			<input type="file" name="upload" id="input">
+			<button type="submit" value="test" id="submit">Upload</button>
 			<div id="load">
 				<img src="load.gif">
 				<br>
