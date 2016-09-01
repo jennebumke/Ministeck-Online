@@ -14,7 +14,7 @@ var ministeckGenerator =
 	errorBlock: new ministeckBlock(0,0,14,false,false,false,false,new ministeckColor(0,0,0),new ministeckColor(0,0,0),this.canvas),
 	loadFile: function()
 	{
-		
+		this.inputDoc = JSON.parse($("#inputDoc").val()).data;
 	},
 	checkSymbols: function(data)
 	{
@@ -23,6 +23,15 @@ var ministeckGenerator =
 	placeBlocks: function(height,length,amountHor,amountVer)
 	{
 		// create block array (using this.blocks and this.inputDoc)
+		// TODO: set canvas height and width
+		for(i = 0; i < amountVer; i++)
+		{
+			for(i2 = 0; i2 < amountHor; i2++)
+			{
+				var colors = this.charToColor(this.inputDoc[i][i2]);
+				this.blocks.push(new ministeckBlock(i2,i,14,false,false,false,false,colors[0],colors[1],this.canvas));
+			}
+		}
 	},
 	charToColor: function(c)
 	{
