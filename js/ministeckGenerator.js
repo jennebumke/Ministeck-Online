@@ -12,6 +12,10 @@ var ministeckGenerator =
 	useColorMapping: false,
 	oldPieces: [],
 	errorBlock: new ministeckBlock(0,0,14,false,false,false,false,new ministeckColor(0,0,0),new ministeckColor(0,0,0),this.canvas),
+	loadFile: function()
+	{
+		
+	},
 	checkSymbols: function(data)
 	{
 		// check symbols in input document (using this.inputDoc)
