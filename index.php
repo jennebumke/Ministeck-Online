@@ -1,5 +1,8 @@
 <?php
-
+	if(isset($_POST['submit']))
+	{
+		$content = $_POST['upload']
+	}
 ?>
 <html>
 	<head>
@@ -14,7 +17,7 @@
 	</head>
 	<body>
 	<?php
-		$content = file_get_contents($_SERVER['DOCUMENT_ROOT']."/Ministeck-Online/Afbeelding - 2.txt");
+		$content = file_get_contents($_SERVER['DOCUMENT_ROOT']."/apps/Ministeck-Online/Afbeelding - 2.txt");
 		echo '<input type="hidden" name="inputDoc" value='.json_encode(str_replace("\r\n", ",", $content)).'>';
 	?>
 		<script>
