@@ -1,7 +1,7 @@
 <?php
 	if(isset($_POST['submit']))
 	{
-		$content = $_POST['upload']
+		echo $_POST['upload'];
 	}
 ?>
 <html>
