@@ -9,7 +9,7 @@
 		<script src="js/ministeckColor.js"></script>
 		<script src="js/ministeckSymColorPair.js"></script>
 		<title>Ministeck Online</title>
-		<link src="css/style.css" rel="stylesheet" type="text/css">
+		<link href="css/style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<form id="input" action="" method="POST">
