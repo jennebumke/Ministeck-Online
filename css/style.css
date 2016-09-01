@@ -18,8 +18,13 @@ form
 
 form > *
 {
-	margin:40vh auto auto;
+	margin:1vh auto;
 	display: block;
+}
+
+form > *:nth-child(1)
+{
+	margin: 40vh auto auto;
 }
 
 form > div
@@ -41,4 +46,7 @@ input
 {
 	width: 108px;
 	outline: none;
+	border-style:none;
+	border-width: 0;
+	border-color: transparent;
 }
