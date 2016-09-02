@@ -50,3 +50,9 @@ input
 	border-width: 0;
 	border-color: transparent;
 }
+
+span
+{
+	font-family: Helvetica;
+	font-size: 11px;
+}

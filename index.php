@@ -54,19 +54,18 @@
 		<script>
 		//initialize
 		$(document).ready(function(){
-			$("#load").css("display","none");
-			$("form").css("display","none");
 			$("form").fadeToggle();
 			ministeckGenerator.loadPieces();
 			ministeckGenerator.loadFile();
 			ministeckGenerator.loadDefaultSymbols();
+			ministeckGenerator.placeBlocks();
 		});
 		</script>
-		<form id="input" action="" method="POST" enctype="multipart/form-data" >
+		<form id="input" action="" method="POST" enctype="multipart/form-data" style="display:none;" >
 			<input type="file" name="upload" id="input">
 			<button type="submit" value="Hello world...!!!" name="submit" id="submit">Upload</button>
-			<div id="load">
-				<img src="load.gif">
+			<div id="load" style="/*display:none;">
+				<img src="load.svg" width="30px">
 				<br>
 				<span id="process"><?php if($error){ echo $error;}else { echo "0%";} ?></span>
 			</div>
