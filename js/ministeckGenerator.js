@@ -17,10 +17,6 @@ var ministeckGenerator =
 		var test = $("#inputDoc");
 		this.inputDoc = $("#inputDoc").val().split(",");
 	},
-	checkSymbols: function(data)
-	{
-		// check symbols in input document (using this.inputDoc)
-	},
 	placeBlocks: function()
 	{
 		// create block array (using this.blocks and this.inputDoc)
@@ -40,7 +36,7 @@ var ministeckGenerator =
 	},
 	charToColor: function(c)
 	{
-		// helper function for placeBlocks(), translates a char to an ministeckColor object
+		// helper function for placeBlocks(), translates a character to an ministeckColor object array
 		var result = [];
 		for(var i = 0; i < this.symbols.length; i++)
 		{
@@ -75,6 +71,11 @@ var ministeckGenerator =
 	paintBlocks: function()
 	{
 		// calls render function for each block (using this.blocks[x].paint() and this.blocks[x].paintBorders())
+		for(var i = 0; i < this.blocks.length; i++)
+		{
+			this.blocks[i].paint();
+			this.blocks[i].paintBorders();
+		}
 	},
 	generatePiece: function(x,y)
 	{
