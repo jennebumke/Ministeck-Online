@@ -1,11 +1,12 @@
 <?php
 	$target_file = NULL;
 	$error = NULL;
+	$uploadOk = 0;
 		// Check if image file is a actual image or fake image
-	if(isset($_POST["submit"])) {
-		$target_dir = "uploads/";
-		$target_file = $target_dir . basename($_FILES["upload"]["name"]);
+	if(isset($_FILES["upload"]["name"])) {
+		$target_dir = "uploads/";		
 		$uploadOk = 1;
+		$target_file = $target_dir . basename($_FILES["upload"]["name"]);
 		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
 		if (file_exists($target_file)) {
@@ -26,6 +27,7 @@
 		if ($uploadOk == 1) {
 			if (!move_uploaded_file($_FILES["upload"]["tmp_name"], $target_file)) {
 				$error = "Sorry, there was an error uploading your file.";
+
 			}
 		}
 	}
@@ -59,11 +61,18 @@
 			ministeckGenerator.loadFile();
 			ministeckGenerator.loadDefaultSymbols();
 			ministeckGenerator.placeBlocks();
+			$("#input").change(function() {
+        		$("#form").submit();
+    		});
 		});
 		</script>
-		<form id="input" action="" method="POST" enctype="multipart/form-data" style="display:none;" >
+		<form id="form" action="" method="POST" enctype="multipart/form-data" style="display:none;" >
+			<span></span>
+			<?php if($uploadOk == 0): ?>
 			<input type="file" name="upload" id="input">
-			<button type="submit" value="Hello world...!!!" name="submit" id="submit">Upload</button>
+			<?php else: ?>
+			<button type="submit" value="Hello world...!!!" name="submit" id="submit">Generate</button>
+			<?php endif; ?>
 			<div id="load" style="/*display:none;">
 				<img src="load.svg" width="30px">
 				<br>

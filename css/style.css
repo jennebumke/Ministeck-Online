@@ -22,9 +22,13 @@ form > *
 	display: block;
 }
 
-form > *:nth-child(1)
+form > span:nth-child(1)
 {
-	margin: 40vh auto auto;
+	display: block;
+	visibility: none;
+	height:0;
+	padding:0;
+	margin: 40vh auto auto;	
 }
 
 form > div
