@@ -15,7 +15,7 @@ var ministeckGenerator =
 	loadFile: function()
 	{
 		var test = $("#inputDoc");
-		this.inputDoc = $("form").val().split(",");
+		this.inputDoc = $("#inputDoc").val().split(",");
 	},
 	checkSymbols: function(data)
 	{
@@ -25,6 +25,7 @@ var ministeckGenerator =
 	{
 		// create block array (using this.blocks and this.inputDoc)
 		// TODO: set canvas height and width
+		this.blocks = [];
 		var amountVer = this.inputDoc.length;
 		console.log(amountVer);
 		var amountHor = this.inputDoc[0].length;
@@ -32,7 +33,7 @@ var ministeckGenerator =
 		{
 			for(i2 = 0; i2 < amountHor; i2++)
 			{
-				var colors = this.charToColor(this.inputDoc[i][i2]);
+				var colors = this.charToColor(this.inputDoc[i].substr(i2,1));
 				this.blocks.push(new ministeckBlock(i2,i,14,false,false,false,false,colors[0],colors[1],this.canvas));
 			}
 		}
@@ -40,17 +41,36 @@ var ministeckGenerator =
 	charToColor: function(c)
 	{
 		// helper function for placeBlocks(), translates a char to an ministeckColor object
-		for(var i = 0; i < this.symbols; i++)
+		var result = [];
+		for(var i = 0; i < this.symbols.length; i++)
 		{
 			if(this.symbols[i].symbol == c)
 			{
-				return new Array(this.symbols[i].color,this.symbols[i].outer);
+				 result.push(this.symbols[i].color,this.symbols[i].outer);
+				 break;
 			}
 		}
+		return result;
 	},
 	generate: function()
 	{
 		// contains main generation loop
+		var amountVer = this.inputDoc.length;
+		var amountHor = this.inputDoc[0].length;
+		var count = 0;
+		for(i = 0; i < amountVer; i++)
+		{
+			for(i2 = 0; i2 < amountHor; i2++)
+			{
+				count++;
+				if(this.getBlock(i2,i).hasPiece == false)
+				{
+					this.generatePiece(i2,i);
+				}
+				var percentComplete = (count / this.blocks.length) * 100;
+				$("#process").html(percentComplete.toString()+"%");
+			}
+		}
 	},
 	paintBlocks: function()
 	{
@@ -59,6 +79,11 @@ var ministeckGenerator =
 	generatePiece: function(x,y)
 	{
 		// recursive function for placing a piece on the board
+		var success = this.checkPieceAndPlace(this.getRandomPiece(),x,y);
+		if(!success)
+		{
+			this.generatePiece(x,y);
+		}
 	},
 	checkPieceAndPlace: function(piece,x,y)
 	{
