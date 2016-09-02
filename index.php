@@ -53,9 +53,16 @@
 	?>
 		<script>
 		//initialize
-		
+		$(document).ready(function(){
+			$("#load").css("display","none");
+			$("form").css("display","none");
+			$("form").fadeToggle();
+			ministeckGenerator.loadPieces();
+			ministeckGenerator.loadFile();
+			ministeckGenerator.loadDefaultSymbols();
+		});
 		</script>
-		<form id="input" action="" method="POST" enctype="multipart/form-data">
+		<form id="input" action="" method="POST" enctype="multipart/form-data" >
 			<input type="file" name="upload" id="input">
 			<button type="submit" value="Hello world...!!!" name="submit" id="submit">Upload</button>
 			<div id="load">
