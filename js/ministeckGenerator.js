@@ -21,10 +21,13 @@ var ministeckGenerator =
 	{
 		// check symbols in input document (using this.inputDoc)
 	},
-	placeBlocks: function(height,length,amountHor,amountVer)
+	placeBlocks: function()
 	{
 		// create block array (using this.blocks and this.inputDoc)
 		// TODO: set canvas height and width
+		var amountVer = this.inputDoc.length;
+		console.log(amountVer);
+		var amountHor = this.inputDoc[0].length;
 		for(i = 0; i < amountVer; i++)
 		{
 			for(i2 = 0; i2 < amountHor; i2++)
