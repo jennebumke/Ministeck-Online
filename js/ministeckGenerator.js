@@ -14,6 +14,7 @@ var ministeckGenerator =
 	errorBlock: new ministeckBlock(0,0,14,false,false,false,false,new ministeckColor(0,0,0),new ministeckColor(0,0,0),this.canvas),
 	loadFile: function()
 	{
+		var test = $("#inputDoc");
 		this.inputDoc = $("#inputDoc").val().split(",");
 	},
 	checkSymbols: function(data)
@@ -56,14 +57,29 @@ var ministeckGenerator =
 	getBlockArray: function(xs,ys)
 	{
 		//returns ministeckBlock objects for all coordinates in the input array
+		var results = [];
+		for(i = 0; i < xs.length; i++)
+		{
+			results.push(this.getBlock(xs[i],ys[i]));
+		}
+		return results;
 	},
 	getBlock: function(x,y)
 	{
 		// returns an ministeckBlock object for the specified coordinates
+		for(i = 0; i < this.blocks.length; i++)
+		{
+			if(this.blocks[i].x == x && this.blocks[i].y == y)
+			{
+				return this.blocks[i];
+			}
+		}
+		return this.errorBlock;
 	},
 	getRandomPiece: function()
 	{
 		// returns a random ministeckPiece object
+		return this.pieces[Math.floor((Math.random() * 10))];
 	},
 	loadPieces: function()
 	{
@@ -78,6 +94,37 @@ var ministeckGenerator =
 		this.pieces.push(new ministeckPiece(ministeckPieceTypes.L3,new ministeckColor(0,0,0)));
 		this.pieces.push(new ministeckPiece(ministeckPieceTypes.L4,new ministeckColor(0,0,0)));
 		this.pieces.push(new ministeckPiece(ministeckPieceTypes.fullblock,new ministeckColor(0,0,0)));
+	},
+	loadDefaultSymbols: function()
+	{
+		this.symbols.push(new ministeckSymColorPair("A",new ministeckColor(251,166,28),new ministeckColor(121,80,13)));
+		this.symbols.push(new ministeckSymColorPair("B",new ministeckColor(41,92,170),new ministeckColor(19,44,82)));
+		this.symbols.push(new ministeckSymColorPair("C",new ministeckColor(241,89,35),new ministeckColor(116,42,16)));
+		this.symbols.push(new ministeckSymColorPair("D",new ministeckColor(124,62,32),new ministeckColor(59,29,15)));
+		this.symbols.push(new ministeckSymColorPair("E",new ministeckColor(255,241,0),new ministeckColor(123,116,0)));
+		this.symbols.push(new ministeckSymColorPair("F",new ministeckColor(247,151,121),new ministeckColor(119,72,58)));
+		this.symbols.push(new ministeckSymColorPair("G",new ministeckColor(23,135,57),new ministeckColor(11,65,27)));
+		this.symbols.push(new ministeckSymColorPair("H",new ministeckColor(229,168,47),new ministeckColor(110,81,22)));
+		this.symbols.push(new ministeckSymColorPair("I",new ministeckColor(254,237,210),new ministeckColor(122,114,101)));
+		this.symbols.push(new ministeckSymColorPair("K",new ministeckColor(129,130,132),new ministeckColor(62,62,63)));
+		this.symbols.push(new ministeckSymColorPair("A",new ministeckColor(251,166,28),new ministeckColor(121,80,13)));
+		this.symbols.push(new ministeckSymColorPair("A",new ministeckColor(251,166,28),new ministeckColor(121,80,13)));
+		this.symbols.push(new ministeckSymColorPair("A",new ministeckColor(251,166,28),new ministeckColor(121,80,13)));
+		this.symbols.push(new ministeckSymColorPair("A",new ministeckColor(251,166,28),new ministeckColor(121,80,13)));
+		this.symbols.push(new ministeckSymColorPair("A",new ministeckColor(251,166,28),new ministeckColor(121,80,13)));
+		this.symbols.push(new ministeckSymColorPair("A",new ministeckColor(251,166,28),new ministeckColor(121,80,13)));
+		this.symbols.push(new ministeckSymColorPair("A",new ministeckColor(251,166,28),new ministeckColor(121,80,13)));
+		this.symbols.push(new ministeckSymColorPair("A",new ministeckColor(251,166,28),new ministeckColor(121,80,13)));
+		this.symbols.push(new ministeckSymColorPair("A",new ministeckColor(251,166,28),new ministeckColor(121,80,13)));
+		this.symbols.push(new ministeckSymColorPair("A",new ministeckColor(251,166,28),new ministeckColor(121,80,13)));
+		this.symbols.push(new ministeckSymColorPair("A",new ministeckColor(251,166,28),new ministeckColor(121,80,13)));
+		this.symbols.push(new ministeckSymColorPair("A",new ministeckColor(251,166,28),new ministeckColor(121,80,13)));
+		this.symbols.push(new ministeckSymColorPair("A",new ministeckColor(251,166,28),new ministeckColor(121,80,13)));
+		this.symbols.push(new ministeckSymColorPair("A",new ministeckColor(251,166,28),new ministeckColor(121,80,13)));
 	}
 }
-ministeckGenerator.loadFile();
+$(document).ready(function(){
+	ministeckGenerator.loadPieces();
+	ministeckGenerator.loadFile();
+	ministeckGenerator.loadDefaultSymbols();
+	});
