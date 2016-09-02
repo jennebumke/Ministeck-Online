@@ -66,12 +66,13 @@
     		});
 		});
 		</script>
+		<span class="copy">&copy; Powered by MiniGen algorithm by Luc Sieben</span>
 		<form id="form" action="" method="POST" enctype="multipart/form-data" style="display:none;" >
 			<span></span>
 			<?php if($uploadOk == 0): ?>
 			<input type="file" name="upload" id="input">
 			<?php else: ?>
-			<button type="submit" value="Hello world...!!!" name="submit" id="submit">Generate</button>
+			<input type="button" value="Generate" name="generate">
 			<?php endif; ?>
 			<div id="load" style="/*display:none;">
 				<img src="load.svg" width="30px">

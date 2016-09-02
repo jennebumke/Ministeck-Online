@@ -50,13 +50,18 @@ input
 {
 	width: 108px;
 	outline: none;
-	border-style:none;
-	border-width: 0;
-	border-color: transparent;
 }
 
-span
+form span
 {
 	font-family: Helvetica;
 	font-size: 11px;
+}
+
+span.copy
+{
+	position: absolute;
+	margin:98vh auto 0;
+	font-size: 1.1vh;
+	left:45%;
 }
