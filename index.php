@@ -27,7 +27,9 @@
 		if ($uploadOk == 1) {
 			if (!move_uploaded_file($_FILES["upload"]["tmp_name"], $target_file)) {
 				$error = "Sorry, there was an error uploading your file.";
-
+			}
+			else {
+				$error = "100%";
 			}
 		}
 	}
@@ -74,6 +76,7 @@
 			ministeckGenerator.canvas = $("canvas")[0].getContext("2d");
 			$("#input").change(function() {
         		$("form").submit();
+				$("#load").fadeToggle();
     		});
 
     		$("#button").click(function() {
@@ -81,6 +84,12 @@
     			$("#load").fadeToggle();
     			ministeckGenerator.generate();
     		});
+
+    		console.log($("#process").html());
+			if($("#process").html() == "100%"){
+				$("#load").css("display","block");
+				$("#load").fadeToggle();
+			}
 		});
 		</script>
 		<div class="copy">&copy; Powered by MiniGen algorithm by Luc Sieben</div>
@@ -94,10 +103,10 @@
 			<?php else: ?>
 			<input type="button" value="generate" name="generate" id="button">
 			<?php endif; ?>
-			<div id="load" style="/*display:none;">
+			<div id="load" style="display:none;">
 				<img src="load.svg" width="30px">
 				<br>
-				<span id="process"><?php if($error){ echo $error;}else { echo "0%";} ?></span>
+				<span id="process"><?php if($error){ echo $error;} else { echo "0%";} ?></span>
 			</div>
 		</form>
 	</body>
