@@ -25,6 +25,10 @@ var ministeckGenerator =
 		var amountVer = this.inputDoc.length;
 		console.log(amountVer);
 		var amountHor = this.inputDoc[0].length;
+
+		$("canvas").attr("width",(amountHor * 14).toString());
+		$("canvas").attr("height",(amountVer * 14).toString());
+
 		for(i = 0; i < amountVer; i++)
 		{
 			for(i2 = 0; i2 < amountHor; i2++)
@@ -75,6 +79,10 @@ var ministeckGenerator =
 				$("#process").html(percentComplete.toString()+"%");
 			}
 		}
+
+		$("form").fadeToggle();
+		this.paintBlocks();
+
 	},
 	paintBlocks: function()
 	{

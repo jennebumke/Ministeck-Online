@@ -69,11 +69,11 @@
 		//initialize
 		$(document).ready(function(){
 			$("form").fadeToggle();
+			ministeckGenerator.canvas = $("canvas")[0].getContext("2d");
 			ministeckGenerator.loadPieces();
 			ministeckGenerator.loadFile();
 			ministeckGenerator.loadDefaultSymbols();
 			ministeckGenerator.placeBlocks();
-			ministeckGenerator.canvas = $("canvas")[0].getContext("2d");
 			$("#input").change(function() {
         		$("form").submit();
 				$("#load").fadeToggle();
@@ -82,7 +82,9 @@
     		$("#button").click(function() {
     			$("#button").fadeToggle();
     			$("#load").fadeToggle();
-    			ministeckGenerator.generate();
+    			setTimeout(function(){
+    				ministeckGenerator.generate();
+    			},500);
     		});
 
     		console.log($("#process").html());

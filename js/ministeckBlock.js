@@ -20,6 +20,8 @@ function ministeckBlock(x,y,heightlength,leftb,rightb,topb,bottomb,fillColor,bac
 	this.paint = function()
 	{
 		// paint inner color (using this.canvas)
+		this.canvas.fillStyle = 'rgb('+ this.fillColor.r + ',' + this.fillColor.g + ',' + this.fillColor.b + ')';
+		this.canvas.fillRect(this.x * 14, this.y * 14, 14 , 14);
 	}
 	this.paintBorders = function()
 	{
