@@ -31,10 +31,20 @@
 			}
 		}
 	}
+
+	$file = 'http://www.domain.com/somefile.jpg';
+	$file_headers = @get_headers($file);
+
+	if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {} else {
+	    if(file_get_contents("js/jquery.js") != file_get_contents("https://code.jquery.com/jquery-3.1.0.min.js"))
+	    {
+	    	copy("https://code.jquery.com/jquery-3.1.0.min.js", "js/jquery.js");
+	    }
+	}
 ?>
 <html>
 	<head>
-		<script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+		<script src="js/jquery.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
 		<script src="js/ministeckBlock.js"></script>
 		<script src="js/ministeckPiece.js"></script>
 		<script src="js/ministeckColor.js"></script>
@@ -65,9 +75,14 @@
 			$("#input").change(function() {
         		$("form").submit();
     		});
+
+    		$("#generate").click(function() {
+    			$("form").fadeToggle();
+    			ministeckGenerator.generate();
+    		});
 		});
 		</script>
-		<span class="copy">&copy; Powered by MiniGen algorithm by Luc Sieben</span>
+		<div class="copy">&copy; Powered by MiniGen algorithm by Luc Sieben</div>
 		<canvas>
 			
 		</canvas>
@@ -76,7 +91,7 @@
 			<?php if($uploadOk == 0): ?>
 			<input type="file" name="upload" id="input">
 			<?php else: ?>
-			<input type="button" value="Generate" name="generate">
+			<input type="button" value="generate" name="generate">
 			<?php endif; ?>
 			<div id="load" style="/*display:none;">
 				<img src="load.svg" width="30px">

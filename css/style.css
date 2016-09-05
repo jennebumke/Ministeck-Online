@@ -3,7 +3,7 @@ body
 	margin:-13px 0 0;
 	padding: 13px 0 0;
 	height: 100vh;
-	background-color: #efefef;
+	background-color: #b31d1d;
 }
 
 form
@@ -12,8 +12,10 @@ form
 	min-width: 900px;
 	margin:0 auto;
 	padding:1vh 1%;
-	height:98vh;
+	height: 98vh;
 	background-color: #fff;
+	opacity: 0.8;
+	box-shadow: 0 0 70px 14px #8C1D1D;
 }
 
 form > *
@@ -58,12 +60,19 @@ form span
 	font-size: 11px;
 }
 
-span.copy
+div.copy
 {
 	position: absolute;
-	margin:98vh auto 0;
+    left: 0;
+    right: 0;
+    bottom: 1;
+    margin-left: auto;
+    margin-right: auto;
 	font-size: 1.1vh;
-	left:45%;
+	font-family: Helvetica;
+	color:#000;
+	z-index:999;
+	text-align: center;
 }
 
 canvas {
