@@ -70,7 +70,7 @@ var ministeckGenerator =
 	},
 	paintBlocks: function()
 	{
-		// calls render function for each block (using this.blocks[x].paint() and this.blocks[x].paintBorders())
+		// calls render functions for each block (using this.blocks[x].paint() and this.blocks[x].paintBorders())
 		for(var i = 0; i < this.blocks.length; i++)
 		{
 			this.blocks[i].paint();
@@ -89,6 +89,260 @@ var ministeckGenerator =
 	checkPieceAndPlace: function(piece,x,y)
 	{
 		// main checking function, contains the MiniGen algorithm
+		if(!this.checkOldPieces(piece))
+		{
+			if(piece.type == ministeckPieceTypes.block)
+			{
+				var bl = this.getBlock(x,y);
+				if(bl.hasPiece)
+				{
+					this.oldPieces.push(piece);
+					return false;
+				}
+				else
+				{
+					bl.leftb = true;
+					bl.topb = true;
+					bl.bottomb = true;
+					bl.rightb = true;
+					return true;
+				}
+			}
+			if(piece.type == ministeckPieceTypes.straight2)
+			{
+				var xs = [x,x + 1];
+				var ys = [y,y];
+				var ajacentBlocks = this.getBlockArray(xs,ys);
+				if(this.checkBlockArray(ajacentBlocks,ajacentBlocks[0].fillColor))
+				{
+					this.oldPieces.push(piece);
+					return false;
+				}
+				else
+				{
+					ajacentBlocks[0].leftb = true;
+					ajacentBlocks[0].topb = true;
+					ajacentBlocks[0].bottomb = true;
+					ajacentBlocks[1].rightb = true;
+					ajacentBlocks[1].topb = true;
+					ajacentBlocks[1].bottomb = true;
+					ajacentBlocks[0].hasPiece = true;
+					ajacentBlocks[1].hasPiece = true;
+					return true;
+				}
+			}
+			if(piece.type == ministeckPieceTypes.straight2down)
+			{
+				var xs = [x,x];
+				var ys = [y,y +1];
+				var ajacentBlocks = this.getBlockArray(xs,ys);
+				if(this.checkBlockArray(ajacentBlocks,ajacentBlocks[0].fillColor))
+				{
+					this.oldPieces.push(piece);
+					return false;
+				}
+				else
+				{
+					ajacentBlocks[0].leftb = true;
+					ajacentBlocks[0].rightb = true;
+					ajacentBlocks[0].topb = true;
+					ajacentBlocks[1].leftb = true;
+					ajacentBlocks[1].bottomb = true;
+					ajacentBlocks[1].rightb = true;
+					ajacentBlocks[0].hasPiece = true;
+					ajacentBlocks[1].hasPiece = true;
+					return true;
+				}
+			}
+			if(piece.type == ministeckPieceTypes.straight3)
+			{
+				var xs = [x,x + 1, x + 2];
+				var ys = [y,y,y];
+				var ajacentBlocks = this.getBlockArray(xs,ys);
+				if(this.checkBlockArray(ajacentBlocks,ajacentBlocks[0].fillColor))
+				{
+					this.oldPieces.push(piece);
+					return false;
+				}
+				else
+				{
+					ajacentBlocks[0].leftb = true;
+					ajacentBlocks[0].topb = true;
+					ajacentBlocks[0].bottomb = true;
+					ajacentBlocks[1].bottomb = true;
+					ajacentBlocks[1].topb = true;
+					ajacentBlocks[2].rightb = true;
+					ajacentBlocks[2].topb = true;
+					ajacentBlocks[2].bottomb = true;
+					ajacentBlocks[0].hasPiece = true;
+					ajacentBlocks[1].hasPiece = true;
+					ajacentBlocks[2].hasPiece = true;
+					return true;
+				}
+			}
+			if(piece.type == ministeckPieceTypes.straight3down)
+			{
+				var xs = [x,x,x];
+				var ys = [y,y + 1,y + 2];
+				var ajacentBlocks = this.getBlockArray(xs,ys);
+				if(this.checkBlockArray(ajacentBlocks,ajacentBlocks[0].fillColor))
+				{
+					this.oldPieces.push(piece);
+					return false;
+				}
+				else
+				{
+					ajacentBlocks[0].leftb = true;
+					ajacentBlocks[0].topb = true;
+					ajacentBlocks[0].rightb = true;
+					ajacentBlocks[1].leftb = true;
+					ajacentBlocks[1].rightb = true;
+					ajacentBlocks[2].leftb = true;
+					ajacentBlocks[2].bottomb = true;
+					ajacentBlocks[2].rightb = true;
+					ajacentBlocks[0].hasPiece = true;
+					ajacentBlocks[1].hasPiece = true;
+					ajacentBlocks[2].hasPiece = true;
+					return true;
+				}
+			}
+			if(piece.type == ministeckPieceTypes.fullblock)
+			{
+				var xs = [x,x + 1,x,x + 1];
+				var ys = [y,y,y + 1,y + 1];
+				var ajacentBlocks = this.getBlockArray(xs,ys);
+				if(this.checkBlockArray(ajacentBlocks,ajacentBlocks[0].fillColor))
+				{
+					this.oldPieces.push(piece);
+					return false;
+				}
+				else
+				{
+					ajacentBlocks[0].leftb = true;
+					ajacentBlocks[0].topb = true;
+					ajacentBlocks[1].rightb = true;
+					ajacentBlocks[1].topb = true;
+					ajacentBlocks[2].leftb = true;
+					ajacentBlocks[2].bottomb = true;
+					ajacentBlocks[3].rightb = true;
+					ajacentBlocks[3].bottomb = true;
+					ajacentBlocks[0].hasPiece = true;
+					ajacentBlocks[1].hasPiece = true;
+					ajacentBlocks[2].hasPiece = true;
+					ajacentBlocks[3].hasPiece = true;
+					return true;
+				}
+			}
+			if(piece.type == ministeckPieceTypes.L)
+			{
+				var xs = [x,x,x + 1];
+				var ys = [y,y + 1,y + 1];
+				var ajacentBlocks = this.getBlockArray(xs,ys);
+				if(this.checkBlockArray(ajacentBlocks,ajacentBlocks[0].fillColor))
+				{
+					this.oldPieces.push(piece);
+					return false;
+				}
+				else
+				{
+					ajacentBlocks[0].leftb = true;
+					ajacentBlocks[0].rightb = true;
+					ajacentBlocks[0].topb = true;
+					ajacentBlocks[1].leftb = true;
+					ajacentBlocks[1].bottomb = true;
+					ajacentBlocks[2].rightb = true;
+					ajacentBlocks[2].topb = true;
+					ajacentBlocks[2].bottom = true;
+					ajacentBlocks[0].hasPiece = true;
+					ajacentBlocks[1].hasPiece = true;
+					ajacentBlocks[2].hasPiece = true;
+					ajacentBlocks[1].needPixelL = true;
+					return true;
+				}
+			}
+			if(piece.type == ministeckPieceTypes.L2)
+			{
+				var xs = [x,x,x + 1];
+				var ys = [y,y + 1,y];
+				var ajacentBlocks = this.getBlockArray(xs,ys);
+				if(this.checkBlockArray(ajacentBlocks,ajacentBlocks[0].fillColor))
+				{
+					this.oldPieces.push(piece);
+					return false;
+				}
+				else
+				{
+					ajacentBlocks[0].leftb = true;
+					ajacentBlocks[0].topb = true;
+					ajacentBlocks[1].leftb = true;
+					ajacentBlocks[1].bottomb = true;
+					ajacentBlocks[1].rightb = true;
+					ajacentBlocks[2].rightb = true;
+					ajacentBlocks[2].topb = true;
+					ajacentBlocks[2].bottomb = true;
+					ajacentBlocks[0].hasPiece = true;
+					ajacentBlocks[1].hasPiece = true;
+					ajacentBlocks[2].hasPiece = true;
+					ajacentBlocks[0].needPixelL = true;
+					return true;
+				}
+			}
+			if(piece.type == ministeckPieceTypes.L3)
+			{
+				var xs = [];
+				var ys = [];
+				var ajacentBlocks = this.getBlockArray(xs,ys);
+				if(this.checkBlockArray(ajacentBlocks,ajacentBlocks[0].fillColor))
+				{
+					this.oldPieces.push(piece);
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+			if(piece.type == ministeckPieceTypes.L4)
+			{
+				var xs = [];
+				var ys = [];
+				var ajacentBlocks = this.getBlockArray(xs,ys);
+				if(this.checkBlockArray(ajacentBlocks,ajacentBlocks[0].fillColor))
+				{
+					this.oldPieces.push(piece);
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+		}
+	},
+	checkBlockArray: function(blocks,color)
+	{
+		var result = false;
+		for(var i = 0; i < blocks.length; i++)
+		{
+			if(blocks[i].fillColor.getColorString() == color.getColorString() || blocks[i].hasPiece == true)
+			{
+				result = true;
+				return result;
+			}
+		}
+		return result;
+	},
+	checkOldPieces: function(piece)
+	{
+		var result = false;
+		for(var i = 0; i < this.oldPieces.length; i++)
+		{
+			if(this.oldPieces[i].type == piece.type)
+			{
+				result = true;
+			}
+		}
+		return result;
 	},
 	getBlockArray: function(xs,ys)
 	{
