@@ -68,7 +68,7 @@ div.copy
     bottom: 1;
     margin-left: auto;
     margin-right: auto;
-	font-size: 1.1vh;
+	font-size: 1em;
 	font-family: Helvetica;
 	color:#000;
 	z-index:999;

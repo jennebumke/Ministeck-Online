@@ -76,8 +76,9 @@
         		$("form").submit();
     		});
 
-    		$("#generate").click(function() {
-    			$("form").fadeToggle();
+    		$("#button").click(function() {
+    			$("#button").fadeToggle();
+    			$("#load").fadeToggle();
     			ministeckGenerator.generate();
     		});
 		});
@@ -91,7 +92,7 @@
 			<?php if($uploadOk == 0): ?>
 			<input type="file" name="upload" id="input">
 			<?php else: ?>
-			<input type="button" value="generate" name="generate">
+			<input type="button" value="generate" name="generate" id="button">
 			<?php endif; ?>
 			<div id="load" style="/*display:none;">
 				<img src="load.svg" width="30px">
