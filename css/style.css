@@ -65,3 +65,8 @@ span.copy
 	font-size: 1.1vh;
 	left:45%;
 }
+
+canvas {
+	position: absolute;
+	/*display:none;*/
+}

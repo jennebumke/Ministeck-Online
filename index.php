@@ -61,13 +61,17 @@
 			ministeckGenerator.loadFile();
 			ministeckGenerator.loadDefaultSymbols();
 			ministeckGenerator.placeBlocks();
+			ministeckGenerator.canvas = $("canvas")[0].getContext("2d");
 			$("#input").change(function() {
-        		$("#form").submit();
+        		$("form").submit();
     		});
 		});
 		</script>
 		<span class="copy">&copy; Powered by MiniGen algorithm by Luc Sieben</span>
-		<form id="form" action="" method="POST" enctype="multipart/form-data" style="display:none;" >
+		<canvas>
+			
+		</canvas>
+		<form action="" method="POST" enctype="multipart/form-data" style="display:none;" >
 			<span></span>
 			<?php if($uploadOk == 0): ?>
 			<input type="file" name="upload" id="input">
