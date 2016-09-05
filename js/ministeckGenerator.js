@@ -59,11 +59,19 @@ var ministeckGenerator =
 			for(i2 = 0; i2 < amountHor; i2++)
 			{
 				count++;
-				if(this.getBlock(i2,i).hasPiece == false)
+				this.oldPieces = [];
+				var currentBlock = this.getBlock(i2,i);
+				if(currentBlock.hasPiece == false)
 				{
+					
 					this.generatePiece(i2,i);
 				}
-				var percentComplete = (count / this.blocks.length) * 100;
+				else
+				{
+					console.log(currentBlock);
+				}
+				var percentComplete = Math.floor((count / this.blocks.length) * 100);
+				console.log(percentComplete);
 				$("#process").html(percentComplete.toString()+"%");
 			}
 		}
@@ -105,6 +113,7 @@ var ministeckGenerator =
 					bl.topb = true;
 					bl.bottomb = true;
 					bl.rightb = true;
+					bl.hasPiece = true;
 					return true;
 				}
 			}
@@ -289,8 +298,8 @@ var ministeckGenerator =
 			}
 			if(piece.type == ministeckPieceTypes.L3)
 			{
-				var xs = [];
-				var ys = [];
+				var xs = [x,x + 1,x + 1];
+				var ys = [y,y,y + 1];
 				var ajacentBlocks = this.getBlockArray(xs,ys);
 				if(this.checkBlockArray(ajacentBlocks,ajacentBlocks[0].fillColor))
 				{
@@ -299,13 +308,25 @@ var ministeckGenerator =
 				}
 				else
 				{
+					ajacentBlocks[0].leftb = true;
+					ajacentBlocks[0].topb = true;
+					ajacentBlocks[0].bottomb = true;
+					ajacentBlocks[1].topb = true;
+					ajacentBlocks[1].rightb = true;
+					ajacentBlocks[2].rightb = true;
+					ajacentBlocks[2].leftb = true;
+					ajacentBlocks[2].bottomb = true;
+					ajacentBlocks[0].hasPiece = true;
+					ajacentBlocks[1].hasPiece = true;
+					ajacentBlocks[2].hasPiece = true;
+					ajacentBlocks[1].needPixelL = true;
 					return true;
 				}
 			}
 			if(piece.type == ministeckPieceTypes.L4)
 			{
-				var xs = [];
-				var ys = [];
+				var xs = [x,x,x - 1];
+				var ys = [y,y + 1,y + 1];
 				var ajacentBlocks = this.getBlockArray(xs,ys);
 				if(this.checkBlockArray(ajacentBlocks,ajacentBlocks[0].fillColor))
 				{
@@ -314,6 +335,18 @@ var ministeckGenerator =
 				}
 				else
 				{
+					ajacentBlocks[0].leftb = true;
+					ajacentBlocks[0].topb = true;
+					ajacentBlocks[0].rightb = true;
+					ajacentBlocks[1].bottomb = true;
+					ajacentBlocks[1].rightb = true;
+					ajacentBlocks[2].topb = true;
+					ajacentBlocks[2].leftb = true;
+					ajacentBlocks[2].bottomb = true;
+					ajacentBlocks[0].hasPiece = true;
+					ajacentBlocks[1].hasPiece = true;
+					ajacentBlocks[2].hasPiece = true;
+					ajacentBlocks[1].needPixelL = true;
 					return true;
 				}
 			}
@@ -322,9 +355,9 @@ var ministeckGenerator =
 	checkBlockArray: function(blocks,color)
 	{
 		var result = false;
-		for(var i = 0; i < blocks.length; i++)
+		for(var i3 = 0; i3 < blocks.length; i3++)
 		{
-			if(blocks[i].fillColor.getColorString() == color.getColorString() || blocks[i].hasPiece == true)
+			if(blocks[i3].fillColor.getColorString() == color.getColorString() || blocks[i3].hasPiece == true)
 			{
 				result = true;
 				return result;
@@ -335,9 +368,9 @@ var ministeckGenerator =
 	checkOldPieces: function(piece)
 	{
 		var result = false;
-		for(var i = 0; i < this.oldPieces.length; i++)
+		for(var i4 = 0; i4 < this.oldPieces.length; i4++)
 		{
-			if(this.oldPieces[i].type == piece.type)
+			if(this.oldPieces[i4].type == piece.type)
 			{
 				result = true;
 			}
@@ -348,20 +381,20 @@ var ministeckGenerator =
 	{
 		//returns ministeckBlock objects for all coordinates in the input array
 		var results = [];
-		for(i = 0; i < xs.length; i++)
+		for(i5 = 0; i5 < xs.length; i5++)
 		{
-			results.push(this.getBlock(xs[i],ys[i]));
+			results.push(this.getBlock(xs[i5],ys[i5]));
 		}
 		return results;
 	},
 	getBlock: function(x,y)
 	{
 		// returns an ministeckBlock object for the specified coordinates
-		for(i = 0; i < this.blocks.length; i++)
+		for(i6 = 0; i6 < this.blocks.length; i6++)
 		{
-			if(this.blocks[i].x == x && this.blocks[i].y == y)
+			if(this.blocks[i6].x == x && this.blocks[i6].y == y)
 			{
-				return this.blocks[i];
+				return this.blocks[i6];
 			}
 		}
 		return this.errorBlock;
