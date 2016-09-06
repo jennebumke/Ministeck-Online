@@ -25,6 +25,27 @@ function ministeckBlock(x,y,heightlength,leftb,rightb,topb,bottomb,fillColor,bac
 	}
 	this.paintBorders = function()
 	{
+		this.canvas.fillStyle = 'rgb('+ this.backColor.r + ',' + this.backColor.g + ',' + this.backColor.b + ')';
+
 		// borders need to be painted (using this.canvas)
+		if (this.rightb)
+		{
+			this.canvas.fillRect(this.x * 14 + 13, this.y * 14, 1 , 14);
+		}
+
+		if (this.leftb)
+		{
+			this.canvas.fillRect(this.x * 14, this.y * 14, 1 , 14);
+		}
+
+		if (this.topb)
+		{
+			this.canvas.fillRect(this.x * 14, this.y * 14, 14 , 1);
+		}
+
+		if (this.bottomb)
+		{
+			this.canvas.fillRect(this.x * 14, this.y * 14 + 13, 14 , 1);
+		}
 	}
 }

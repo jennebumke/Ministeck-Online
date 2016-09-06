@@ -3,7 +3,7 @@ body
 	margin:-13px 0 0;
 	padding: 13px 0 0;
 	height: 100vh;
-	background-color: #b31d1d;
+	background-image: url('../img/back.png');
 }
 
 form
@@ -15,7 +15,7 @@ form
 	height: 98vh;
 	background-color: #fff;
 	opacity: 0.8;
-	box-shadow: 0 0 70px 14px #8C1D1D;
+	box-shadow: 0 0 70px 14px #7b7b7b;
 }
 
 form > *
@@ -83,4 +83,18 @@ canvas {
 	top:50%;
 	transform: translate(-50%, -50%);
 	/*display:none;*/
+}
+
+div#download {
+	position: fixed;
+	left:0;
+	right:0;
+	bottom:80;
+	background-color: rgba(235,218,155,.8);
+	border-radius: 3px;
+	box-shadow: 0 0 30px 4px rgba(235,218,155,.8);
+	margin: 0 auto;
+	width: 300px;
+	z-index: 999;
+	text-align: center;
 }

@@ -41,9 +41,9 @@
 		<script src="js/ministeckPiece.js"></script>
 		<script src="js/ministeckColor.js"></script>
 		<script src="js/ministeckSymColorPair.js"></script>
-		<script src="js/ministeckGenerator.js"></script>
+		<script src="js/ministeckGenerator.js?<?php echo rand(); ?>"></script>
 		<title>Ministeck Online</title>
-		<link href="css/style.css" rel="stylesheet" type="text/css">
+		<link href="css/style.css?<?php echo rand(); ?>" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 	<?php
@@ -52,7 +52,8 @@
 		if(is_file($target_file))
 		{
 			$content = file_get_contents($target_file);
-			echo '<input type="hidden" id="inputDoc" value='.json_encode(str_replace("\r\n", ",", $content)).'>';	
+			echo '<input type="hidden" id="inputDoc" value='.json_encode(str_replace("\r\n", ",", $content)).'>';
+			unlink($target_file);
 		}
 		elseif(isset($_POST["submit"]))
 		{
@@ -92,6 +93,15 @@
 		<canvas>
 			
 		</canvas>
+		<div id="download" style="display:none;">
+			<p>
+				Thank you for using Ministeck Online!<br>
+				Click the link below to get your generated image.
+			</p>
+			<p>
+				<a id="download-link" download>Your generated image! (With love)</a>
+			</p>
+		</div>
 		<form action="" method="POST" enctype="multipart/form-data" style="display:none;" >
 			<span></span>
 			<?php if($uploadOk == 0): ?>

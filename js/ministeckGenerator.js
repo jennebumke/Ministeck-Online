@@ -15,7 +15,6 @@ var ministeckGenerator =
 	loadFile: function()
 	{
 		var test = $("#inputDoc");
-		console.log(test.val());
 		if($("#inputDoc").val() != undefined)
 		{
 			this.inputDoc = $("#inputDoc").val().split(",");
@@ -28,7 +27,6 @@ var ministeckGenerator =
 		// TODO: set canvas height and width
 		this.blocks = [];
 		var amountVer = this.inputDoc.length;
-		console.log(amountVer);
 		var amountHor = this.inputDoc[0].length;
 
 		$("canvas").attr("width",(amountHor * 14).toString());
@@ -75,12 +73,7 @@ var ministeckGenerator =
 					
 					this.generatePiece(i2,i);
 				}
-				else
-				{
-					console.log(currentBlock);
-				}
 				var percentComplete = Math.floor((count / this.blocks.length) * 100);
-				console.log(percentComplete);
 				$("#process").html(percentComplete.toString()+"%");
 			}
 		}
@@ -88,6 +81,8 @@ var ministeckGenerator =
 		$("form").fadeToggle();
 		$("body").css("height","auto");
 		this.paintBlocks();
+		$("#download").fadeToggle();
+		$("#download-link").attr("href",$("canvas")[0].toDataURL("application/x-download"));
 
 	},
 	paintBlocks: function()
@@ -275,7 +270,7 @@ var ministeckGenerator =
 					ajacentBlocks[1].bottomb = true;
 					ajacentBlocks[2].rightb = true;
 					ajacentBlocks[2].topb = true;
-					ajacentBlocks[2].bottom = true;
+					ajacentBlocks[2].bottomb = true;
 					ajacentBlocks[0].hasPiece = true;
 					ajacentBlocks[1].hasPiece = true;
 					ajacentBlocks[2].hasPiece = true;
@@ -366,15 +361,14 @@ var ministeckGenerator =
 			}
 		}
 	},
-	checkBlockArray: function(blocks,color)
+	checkBlockArray: function(inputBlocks,color)
 	{
 		var result = false;
-		for(var i3 = 0; i3 < blocks.length; i3++)
+		for(var i3 = 0; i3 < inputBlocks.length; i3++)
 		{
-			if(blocks[i3].fillColor.getColorString() == color.getColorString() || blocks[i3].hasPiece == true)
+			if(inputBlocks[i3].fillColor.getColorString() != color.getColorString() || inputBlocks[i3].hasPiece == true)
 			{
 				result = true;
-				return result;
 			}
 		}
 		return result;
@@ -416,7 +410,9 @@ var ministeckGenerator =
 	getRandomPiece: function()
 	{
 		// returns a random ministeckPiece object
-		return this.pieces[Math.floor((Math.random() * 10))];
+		var test = Math.floor((Math.random() * 10));
+		//console.log(test)
+		return this.pieces[test];
 	},
 	loadPieces: function()
 	{
