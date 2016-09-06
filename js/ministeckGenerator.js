@@ -15,7 +15,12 @@ var ministeckGenerator =
 	loadFile: function()
 	{
 		var test = $("#inputDoc");
-		this.inputDoc = $("#inputDoc").val().split(",");
+		console.log(test.val());
+		if($("#inputDoc").val() != undefined)
+		{
+			this.inputDoc = $("#inputDoc").val().split(",");
+			ministeckGenerator.placeBlocks();
+		}
 	},
 	placeBlocks: function()
 	{
@@ -81,6 +86,7 @@ var ministeckGenerator =
 		}
 
 		$("form").fadeToggle();
+		$("body").css("height","auto");
 		this.paintBlocks();
 
 	},

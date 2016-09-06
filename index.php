@@ -33,20 +33,10 @@
 			}
 		}
 	}
-
-	$file = 'http://www.domain.com/somefile.jpg';
-	$file_headers = @get_headers($file);
-
-	if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {} else {
-	    if(file_get_contents("js/jquery.js") != file_get_contents("https://code.jquery.com/jquery-3.1.0.min.js"))
-	    {
-	    	copy("https://code.jquery.com/jquery-3.1.0.min.js", "js/jquery.js");
-	    }
-	}
 ?>
 <html>
 	<head>
-		<script src="js/jquery.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
 		<script src="js/ministeckBlock.js"></script>
 		<script src="js/ministeckPiece.js"></script>
 		<script src="js/ministeckColor.js"></script>
@@ -57,13 +47,18 @@
 	</head>
 	<body>
 	<?php
-		$content = file_get_contents("Afbeelding - 2.txt");
-		echo '<input type="hidden" id="inputDoc" value='.json_encode(str_replace("\r\n", ",", $content)).'>';
-		/*if(is_file($target_file))
+		//$content = file_get_contents("Afbeelding - 2.txt");
+		//echo '<input type="hidden" id="inputDoc" value='.json_encode(str_replace("\r\n", ",", $content)).'>';
+		if(is_file($target_file))
 		{
 			$content = file_get_contents($target_file);
 			echo '<input type="hidden" id="inputDoc" value='.json_encode(str_replace("\r\n", ",", $content)).'>';	
-		}*/
+		}
+		elseif(isset($_POST["submit"]))
+		{
+			echo '<input type="hidden" id="inputDoc" value="">';
+			$error = "We lost your file :-(";
+		}
 	?>
 		<script>
 		//initialize
@@ -71,9 +66,8 @@
 			$("form").fadeToggle();
 			ministeckGenerator.canvas = $("canvas")[0].getContext("2d");
 			ministeckGenerator.loadPieces();
-			ministeckGenerator.loadFile();
 			ministeckGenerator.loadDefaultSymbols();
-			ministeckGenerator.placeBlocks();
+			ministeckGenerator.loadFile();
 			$("#input").change(function() {
         		$("form").submit();
 				$("#load").fadeToggle();
