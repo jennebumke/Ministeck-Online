@@ -16,21 +16,15 @@ form
 	background-color: #fff;
 	opacity: 0.8;
 	box-shadow: 0 0 70px 14px #7b7b7b;
+	background-image: url('../img/logo.bmp');
+	background-repeat: no-repeat;
+	background-size: 100% auto;
 }
 
 form > *
 {
 	margin:1vh auto;
 	display: block;
-}
-
-form > span:nth-child(1)
-{
-	display: block;
-	visibility: none;
-	height:0;
-	padding:0;
-	margin: 40vh auto auto;	
 }
 
 form > div
@@ -97,4 +91,13 @@ div#download {
 	width: 300px;
 	z-index: 999;
 	text-align: center;
+}
+#subtitle {
+	text-align: center;
+	font-size: 30px;
+	margin-top: 40px;
+}
+.column {
+	width: 50%;
+	float:left;
 }

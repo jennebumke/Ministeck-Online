@@ -3,7 +3,7 @@
 	$error = NULL;
 	$uploadOk = 0;
 		// Check if image file is a actual image or fake image
-	if(isset($_FILES["upload"]["name"])) {
+	if(isset($_FILES["upload"]["name"]) && !isset($_POST["reload"])) {
 		$target_dir = "uploads/";		
 		$uploadOk = 1;
 		$target_file = $target_dir . basename($_FILES["upload"]["name"]);
@@ -103,7 +103,9 @@
 			</p>
 		</div>
 		<form action="" method="POST" enctype="multipart/form-data" style="display:none;" >
-			<span></span>
+			<p id="subtitle">
+				Online Ministeck generator
+			</p>
 			<?php if($uploadOk == 0): ?>
 			<input type="file" name="upload" id="input">
 			<?php else: ?>
@@ -113,6 +115,12 @@
 				<img src="load.svg" width="30px">
 				<br>
 				<span id="process"><?php if($error){ echo $error;} else { echo "0%";} ?></span>
+			</div>
+			<div class="column">
+				
+			</div>
+			<div class="column">
+				
 			</div>
 		</form>
 	</body>
