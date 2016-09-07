@@ -73,8 +73,6 @@ var ministeckGenerator =
 					
 					this.generatePiece(i2,i);
 				}
-				var percentComplete = Math.floor((count / this.blocks.length) * 100);
-				$("#process").html(percentComplete.toString()+"%");
 			}
 		}
 
@@ -82,8 +80,6 @@ var ministeckGenerator =
 		$("body").css("height","auto");
 		this.paintBlocks();
 		$("#download").fadeToggle();
-		$("#download-link").attr("href",$("canvas")[0].toDataURL("application/x-download"));
-
 	},
 	paintBlocks: function()
 	{
@@ -398,7 +394,24 @@ var ministeckGenerator =
 	getBlock: function(x,y)
 	{
 		// returns an ministeckBlock object for the specified coordinates
-		for(i6 = 0; i6 < this.blocks.length; i6++)
+		var xLength = this.inputDoc[0].length;
+		var result = "";
+		if(y > 0)
+		{
+			result = this.blocks[y * xLength + x -1];
+		}
+		else
+		{
+			result = this.blocks[y * xLength + x];
+		}
+		if(result == undefined)
+		{
+			return this.errorBlock;
+		}
+		return result;
+		
+
+		/*for(i6 = 0; i6 < this.blocks.length; i6++)
 		{
 			if(this.blocks[i6].x == x && this.blocks[i6].y == y)
 			{
@@ -406,6 +419,7 @@ var ministeckGenerator =
 			}
 		}
 		return this.errorBlock;
+		*/
 	},
 	getRandomPiece: function()
 	{
@@ -439,12 +453,14 @@ var ministeckGenerator =
 		this.symbols.push(new ministeckSymColorPair("G",new ministeckColor(23,135,57),new ministeckColor(11,65,27)));
 		this.symbols.push(new ministeckSymColorPair("H",new ministeckColor(229,168,47),new ministeckColor(110,81,22)));
 		this.symbols.push(new ministeckSymColorPair("I",new ministeckColor(254,237,210),new ministeckColor(122,114,101)));
+		this.symbols.push(new ministeckSymColorPair("J",new ministeckColor(237,184,201),new ministeckColor(207,154,171)));
 		this.symbols.push(new ministeckSymColorPair("K",new ministeckColor(129,130,132),new ministeckColor(62,62,63)));
 		this.symbols.push(new ministeckSymColorPair("L",new ministeckColor(200,201,203),new ministeckColor(96,96,97)));
 		this.symbols.push(new ministeckSymColorPair("M",new ministeckColor(182,97,35),new ministeckColor(87,46,16)));
 		this.symbols.push(new ministeckSymColorPair("N",new ministeckColor(76,184,71),new ministeckColor(36,88,34)));
 		this.symbols.push(new ministeckSymColorPair("O",new ministeckColor(86,98,61),new ministeckColor(41,47,29)));
 		this.symbols.push(new ministeckSymColorPair("P",new ministeckColor(247,172,188),new ministeckColor(119,82,90)));
+		this.symbols.push(new ministeckSymColorPair("Q",new ministeckColor(188,100,244),new ministeckColor(158,70,214)));
 		this.symbols.push(new ministeckSymColorPair("R",new ministeckColor(218,33,41),new ministeckColor(105,15,19)));
 		this.symbols.push(new ministeckSymColorPair("S",new ministeckColor(0,0,0),new ministeckColor(62,62,63)));
 		this.symbols.push(new ministeckSymColorPair("T",new ministeckColor(174,144,51),new ministeckColor(83,69,24)));
@@ -454,5 +470,49 @@ var ministeckGenerator =
 		this.symbols.push(new ministeckSymColorPair("X",new ministeckColor(140,198,63),new ministeckColor(67,95,30)));
 		this.symbols.push(new ministeckSymColorPair("Y",new ministeckColor(236,0,141),new ministeckColor(113,0,68)));
 		this.symbols.push(new ministeckSymColorPair("Z",new ministeckColor(116,157,210),new ministeckColor(55,75,101)));
+		this.symsToSelect();
+		
+	},
+	symsToSelect: function()
+	{
+		$("#symbol-selector").empty();
+		$("#symbol-selector").append('<option value="EMPTY"></option>');
+		for(var i = 0; i < this.symbols.length; i++)
+		{
+			$("#symbol-selector").append('<option style="color: rgb('+this.symbols[i].color.r+','+this.symbols[i].color.g+','+this.symbols[i].color.b+')" value="'+this.symbols[i].color.r+','+this.symbols[i].color.g+','+this.symbols[i].color.b+'|'+this.symbols[i].outer.r+','+this.symbols[i].outer.g+','+this.symbols[i].outer.b+'">&#9608;&#9608;&#9608; --> '+this.symbols[i].symbol+'</option>');
+		}
+	},
+	remapSymbol: function(sym,col)
+	{
+		if(this.isLetter(sym) && sym.length == 1)
+		{
+			for(var i = 0; i < this.symbols.length; i++)
+			{
+				if(this.symbols[i].symbol == sym)
+				{
+					var colStrings = col.split("|");
+					var fillColString = colStrings[0];
+					var outerColString = colStrings[1];
+					var fillColors = fillColString.split(",");
+					var outerColors = outerColString.split(",");
+					this.symbols[i].color.r = parseInt(fillColors[0]);
+					this.symbols[i].color.g = parseInt(fillColors[1]);
+					this.symbols[i].color.b = parseInt(fillColors[2]);
+					this.symbols[i].outer.r = parseInt(outerColors[0]);
+					this.symbols[i].outer.g = parseInt(outerColors[1]);
+					this.symbols[i].outer.b = parseInt(outerColors[2]);
+					this.symsToSelect();
+					return;
+				}
+			}
+		}
+		else
+		{
+			alert("That character is not a letter!");
+		}
+	},
+	isLetter: function(str)
+	{
+  		return str.length === 1 && str.match(/[a-z]/i);
 	}
 }

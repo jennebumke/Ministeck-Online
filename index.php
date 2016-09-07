@@ -37,6 +37,7 @@
 <html>
 	<head>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+		<script src="js/plugins/fileSaver.js"></script>
 		<script src="js/ministeckBlock.js"></script>
 		<script src="js/ministeckPiece.js"></script>
 		<script src="js/ministeckColor.js"></script>
@@ -53,6 +54,7 @@
 		{
 			$content = file_get_contents($target_file);
 			echo '<input type="hidden" id="inputDoc" value='.json_encode(str_replace("\r\n", ",", $content)).'>';
+			echo '<input type="hidden" id="inputDocName" value="'.basename($target_file,".txt").'">';
 			unlink($target_file);
 		}
 		elseif(isset($_POST["submit"]))
@@ -69,6 +71,7 @@
 			ministeckGenerator.loadPieces();
 			ministeckGenerator.loadDefaultSymbols();
 			ministeckGenerator.loadFile();
+
 			$("#input").change(function() {
         		$("form").submit();
 				$("#load").fadeToggle();
@@ -77,16 +80,28 @@
     		$("#button").click(function() {
     			$("#button").fadeToggle();
     			$("#load").fadeToggle();
+    			$("#process").html("Processing...");
     			setTimeout(function(){
     				ministeckGenerator.generate();
-    			},500);
+    			},200);
     		});
+
+    		$("#remap").click(function(){
+    			$("#sym").val($("#sym").val().toUpperCase());
+    			ministeckGenerator.remapSymbol($("#sym").val(),$("#symbol-selector").val());
+    		})
 
     		console.log($("#process").html());
 			if($("#process").html() == "100%"){
 				$("#load").css("display","block");
 				$("#load").fadeToggle();
 			}
+
+			$("#download-link").click(function(){
+				$("canvas")[0].toBlob(function(blob) {
+		    		saveAs(blob, $("#inputDocName").val() + ".png")
+		    	});
+			});
 		});
 		</script>
 		<div class="copy">&copy; Powered by MiniGen algorithm by Luc Sieben</div>
@@ -99,7 +114,7 @@
 				Click the link below to get your generated image.
 			</p>
 			<p>
-				<a id="download-link" download>Your generated image! (With love)</a>
+				<span id="download-link">Your generated image! (With love)</span>
 			</p>
 		</div>
 		<form action="" method="POST" enctype="multipart/form-data" style="display:none;" >
@@ -110,6 +125,13 @@
 			<input type="file" name="upload" id="input">
 			<?php else: ?>
 			<input type="button" value="generate" name="generate" id="button">
+			<div id="symChange">
+				<p>Enter the symbol you want to re-map:</p>
+				<input type="text" id="sym" maxlength="1">
+				<select id="symbol-selector">
+				</select>
+				<input type="button" id="remap" value="Re-map">
+			</div>
 			<?php endif; ?>
 			<div id="load" style="display:none;">
 				<img src="load.svg" width="30px">
@@ -117,7 +139,7 @@
 				<span id="process"><?php if($error){ echo $error;} else { echo "0%";} ?></span>
 			</div>
 			<div class="column">
-				
+
 			</div>
 			<div class="column">
 				

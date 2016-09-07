@@ -6,6 +6,11 @@ body
 	background-image: url('../img/back.png');
 }
 
+body *
+{
+	font-family: Verdana;
+}
+
 form
 {
 	width:48%;
@@ -29,7 +34,6 @@ form > *
 
 form > div
 {
-	width: 180px;
 	text-align: center;
 }
 
@@ -42,8 +46,32 @@ form > div
 	}
 }
 
-input
-{
+input[type="text"] {
+	width: 50px;
+}
+
+input[type="button"],
+input[type="text"],
+select {
+	border-radius: 3px;
+	background-color: #fff;
+	border: solid 1px blue;
+	transition: box-shadow 600ms ease;
+}
+
+input[type="button"]:hover,
+input[type="text"]:hover,
+select:hover {
+	box-shadow: 0 0 7px 0 blue inset;
+}
+
+input[type="button"]:focus,
+input[type="text"]:focus,
+select:focus {
+	box-shadow: 0 0 7px 0 blue;
+}
+
+input[type="file"] {
 	width: 108px;
 	outline: none;
 }
@@ -59,7 +87,8 @@ div.copy
 	position: fixed;
     left: 0;
     right: 0;
-    bottom: 1;
+    bottom: 0;
+    padding-bottom: 1px;
     margin-left: auto;
     margin-right: auto;
 	font-size: 1em;
@@ -67,6 +96,7 @@ div.copy
 	color:#000;
 	z-index:999;
 	text-align: center;
+	background-color: rgba(0,0,0,.3)
 }
 
 canvas {
@@ -77,6 +107,11 @@ canvas {
 	top:50%;
 	transform: translate(-50%, -50%);
 	/*display:none;*/
+}
+
+div#symChange > * {
+	display: initial;
+	margin:0;
 }
 
 div#download {
@@ -92,6 +127,18 @@ div#download {
 	z-index: 999;
 	text-align: center;
 }
+
+span#download-link {
+	text-decoration: underline;
+	color: #0000FF;
+	cursor: pointer;
+}
+
+span#download-link:active {
+	color: #FF0000;
+	cursor: default;
+}
+
 #subtitle {
 	text-align: center;
 	font-size: 30px;
