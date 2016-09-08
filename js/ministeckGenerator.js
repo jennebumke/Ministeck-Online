@@ -2,7 +2,7 @@ var ministeckGenerator =
 {
 	pieces:[],
 	symbols:[],
-	blocks:[],
+	blocks:[[]],
 	inputDoc: [],
 	canvas: undefined,
 	amountx: 0,
@@ -34,10 +34,11 @@ var ministeckGenerator =
 
 		for(i = 0; i < amountVer; i++)
 		{
+			this.blocks.push([]);
 			for(i2 = 0; i2 < amountHor; i2++)
 			{
 				var colors = this.charToColor(this.inputDoc[i].substr(i2,1));
-				this.blocks.push(new ministeckBlock(i2,i,14,false,false,false,false,colors[0],colors[1],this.canvas));
+				this.blocks[i].push(new ministeckBlock(i2,i,14,false,false,false,false,colors[0],colors[1],this.canvas));
 			}
 		}
 	},
@@ -84,10 +85,16 @@ var ministeckGenerator =
 	paintBlocks: function()
 	{
 		// calls render functions for each block (using this.blocks[x].paint() and this.blocks[x].paintBorders())
-		for(var i = 0; i < this.blocks.length; i++)
+		var amountVer = this.inputDoc.length;
+		var amountHor = this.inputDoc[0].length;
+		var count = 0;
+		for(i = 0; i < amountVer; i++)
 		{
-			this.blocks[i].paint();
-			this.blocks[i].paintBorders();
+			for(i2 = 0; i2 < amountHor; i2++)
+			{
+				this.blocks[i][i2].paint();
+				this.blocks[i][i2].paintBorders();
+			}
 		}
 	},
 	generatePiece: function(x,y)
@@ -394,22 +401,16 @@ var ministeckGenerator =
 	getBlock: function(x,y)
 	{
 		// returns an ministeckBlock object for the specified coordinates
-		var xLength = this.inputDoc[0].length;
-		var result = "";
-		if(y > 0)
+		if(y > this.blocks.length -1)
 		{
-			result = this.blocks[y * xLength + x -1];
+			return this.errorBlock;
 		}
-		else
-		{
-			result = this.blocks[y * xLength + x];
-		}
+		var result = this.blocks[y][x];
 		if(result == undefined)
 		{
 			return this.errorBlock;
 		}
 		return result;
-		
 
 		/*for(i6 = 0; i6 < this.blocks.length; i6++)
 		{
