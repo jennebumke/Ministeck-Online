@@ -1,5 +1,6 @@
 var ministeckGenerator = 
-{
+{	//generate the text to canvas
+	//init
 	pieces:[],
 	symbols:[],
 	blocks:[[]],
@@ -12,8 +13,9 @@ var ministeckGenerator =
 	useColorMapping: false,
 	oldPieces: [],
 	errorBlock: new ministeckBlock(0,0,14,false,false,false,false,new ministeckColor(0,0,0),new ministeckColor(0,0,0),this.canvas),
+
 	loadFile: function()
-	{
+	{	// get the file data
 		var test = $("#inputDoc");
 		if($("#inputDoc").val() != undefined)
 		{
@@ -23,8 +25,7 @@ var ministeckGenerator =
 	},
 	placeBlocks: function()
 	{
-		// create block array (using this.blocks and this.inputDoc)
-		// TODO: set canvas height and width
+		// create 2d block array for where the blocks need to be placed
 		this.blocks = [];
 		var amountVer = this.inputDoc.length;
 		var amountHor = this.inputDoc[0].length;
@@ -43,8 +44,7 @@ var ministeckGenerator =
 		}
 	},
 	charToColor: function(c)
-	{
-		// helper function for placeBlocks(), translates a character to an ministeckColor object array
+	{	// helper function for placeBlocks(), translates a character to an ministeckColor object array
 		var result = [];
 		for(var i = 0; i < this.symbols.length; i++)
 		{
@@ -57,8 +57,7 @@ var ministeckGenerator =
 		return result;
 	},
 	generate: function()
-	{
-		// contains main generation loop
+	{	// generation calls
 		var amountVer = this.inputDoc.length;
 		var amountHor = this.inputDoc[0].length;
 		var count = 0;
@@ -83,8 +82,7 @@ var ministeckGenerator =
 		$("#download").fadeToggle();
 	},
 	paintBlocks: function()
-	{
-		// calls render functions for each block (using this.blocks[x].paint() and this.blocks[x].paintBorders())
+	{	// calls render functions for each block
 		var amountVer = this.inputDoc.length;
 		var amountHor = this.inputDoc[0].length;
 		var count = 0;
@@ -98,8 +96,7 @@ var ministeckGenerator =
 		}
 	},
 	generatePiece: function(x,y)
-	{
-		// recursive function for placing a piece on the board
+	{	// recursive function for placing a piece on the board
 		var success = this.checkPieceAndPlace(this.getRandomPiece(),x,y);
 		if(!success)
 		{
@@ -107,8 +104,8 @@ var ministeckGenerator =
 		}
 	},
 	checkPieceAndPlace: function(piece,x,y)
-	{
-		// main checking function, contains the MiniGen algorithm
+	{	// main checking function, contains the MiniGen algorithm (c)
+		// sets the value of the borders to create correct shapes
 		if(!this.checkOldPieces(piece))
 		{
 			if(piece.type == ministeckPieceTypes.block)
@@ -365,7 +362,7 @@ var ministeckGenerator =
 		}
 	},
 	checkBlockArray: function(inputBlocks,color)
-	{
+	{	// checks if the array is valid
 		var result = false;
 		for(var i3 = 0; i3 < inputBlocks.length; i3++)
 		{
@@ -377,7 +374,7 @@ var ministeckGenerator =
 		return result;
 	},
 	checkOldPieces: function(piece)
-	{
+	{	// return what type the old pieces are to create valid shapes later
 		var result = false;
 		for(var i4 = 0; i4 < this.oldPieces.length; i4++)
 		{
@@ -390,7 +387,7 @@ var ministeckGenerator =
 	},
 	getBlockArray: function(xs,ys)
 	{
-		//returns ministeckBlock objects for all coordinates in the input array
+		// returns ministeckBlock objects for all coordinates in the input array
 		var results = [];
 		for(i5 = 0; i5 < xs.length; i5++)
 		{
@@ -411,27 +408,16 @@ var ministeckGenerator =
 			return this.errorBlock;
 		}
 		return result;
-
-		/*for(i6 = 0; i6 < this.blocks.length; i6++)
-		{
-			if(this.blocks[i6].x == x && this.blocks[i6].y == y)
-			{
-				return this.blocks[i6];
-			}
-		}
-		return this.errorBlock;
-		*/
 	},
 	getRandomPiece: function()
 	{
 		// returns a random ministeckPiece object
 		var test = Math.floor((Math.random() * 10));
-		//console.log(test)
 		return this.pieces[test];
 	},
 	loadPieces: function()
 	{
-		// adds all ministeckPieceType's into the pieces array(this.Pieces)
+		// adds all ministeckPieceTypes into the pieces array
 		this.pieces.push(new ministeckPiece(ministeckPieceTypes.block ,new ministeckColor(0,0,0)));
 		this.pieces.push(new ministeckPiece(ministeckPieceTypes.straight2,new ministeckColor(0,0,0)));
 		this.pieces.push(new ministeckPiece(ministeckPieceTypes.straight3,new ministeckColor(0,0,0)));
@@ -445,6 +431,7 @@ var ministeckGenerator =
 	},
 	loadDefaultSymbols: function()
 	{
+		// adds all ministeckColorPairs into the pieces array
 		this.symbols.push(new ministeckSymColorPair("A",new ministeckColor(251,166,28),new ministeckColor(121,80,13)));
 		this.symbols.push(new ministeckSymColorPair("B",new ministeckColor(41,92,170),new ministeckColor(19,44,82)));
 		this.symbols.push(new ministeckSymColorPair("C",new ministeckColor(241,89,35),new ministeckColor(116,42,16)));
@@ -475,7 +462,7 @@ var ministeckGenerator =
 		
 	},
 	symsToSelect: function()
-	{
+	{	// create the remap select
 		$("#symbol-selector").empty();
 		$("#symbol-selector").append('<option value="EMPTY"></option>');
 		for(var i = 0; i < this.symbols.length; i++)
@@ -484,7 +471,7 @@ var ministeckGenerator =
 		}
 	},
 	remapSymbol: function(sym,col)
-	{
+	{	// remap the symbol to the selected color
 		if(this.isLetter(sym) && sym.length == 1)
 		{
 			for(var i = 0; i < this.symbols.length; i++)
@@ -513,7 +500,7 @@ var ministeckGenerator =
 		}
 	},
 	isLetter: function(str)
-	{
+	{	// checks whether the input is a character
   		return str.length === 1 && str.match(/[a-z]/i);
 	}
 }

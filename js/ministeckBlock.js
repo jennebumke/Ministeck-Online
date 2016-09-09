@@ -1,6 +1,5 @@
 function ministeckBlock(x,y,heightlength,leftb,rightb,topb,bottomb,fillColor,backColor,canvas)
-{
-	// base variables
+{	// base variables
 	this.x = x;
 	this.y = y;
 	this.heightlength = heightlength;
@@ -19,7 +18,7 @@ function ministeckBlock(x,y,heightlength,leftb,rightb,topb,bottomb,fillColor,bac
 	//functions
 	this.paint = function()
 	{
-		// paint inner color (using this.canvas)
+		// paint the square
 		this.canvas.fillStyle = 'rgb('+ this.fillColor.r + ',' + this.fillColor.g + ',' + this.fillColor.b + ')';
 		this.canvas.fillRect(this.x * 14, this.y * 14, 14 , 14);
 	}
@@ -27,24 +26,24 @@ function ministeckBlock(x,y,heightlength,leftb,rightb,topb,bottomb,fillColor,bac
 	{
 		this.canvas.fillStyle = 'rgb('+ this.backColor.r + ',' + this.backColor.g + ',' + this.backColor.b + ')';
 
-		// borders need to be painted (using this.canvas)
+		// borders need to be painted
 		if (this.rightb)
-		{
+		{	//paint right border
 			this.canvas.fillRect(this.x * 14 + 13, this.y * 14, 1 , 14);
 		}
 
 		if (this.leftb)
-		{
+		{	//paint left border
 			this.canvas.fillRect(this.x * 14, this.y * 14, 1 , 14);
 		}
 
 		if (this.topb)
-		{
+		{	//paint top border
 			this.canvas.fillRect(this.x * 14, this.y * 14, 14 , 1);
 		}
 
 		if (this.bottomb)
-		{
+		{	//paint bottom border
 			this.canvas.fillRect(this.x * 14, this.y * 14 + 13, 14 , 1);
 		}
 	}

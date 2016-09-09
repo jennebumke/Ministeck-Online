@@ -2,6 +2,8 @@
 	$target_file = NULL;
 	$error = NULL;
 	$uploadOk = 0;
+
+	
 		// Check if image file is a actual image or fake image
 	if(isset($_FILES["upload"]["name"]) && !isset($_POST["reload"])) {
 		$target_dir = "uploads/";		
@@ -134,7 +136,7 @@
 			</div>
 			<?php endif; ?>
 			<div id="load" style="display:none;">
-				<img src="load.svg" width="30px">
+				<img src="img/load.svg" width="30px">
 				<br>
 				<span id="process"><?php if($error){ echo $error;} else { echo "0%";} ?></span>
 			</div>

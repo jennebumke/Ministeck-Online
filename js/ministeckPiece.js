@@ -1,5 +1,5 @@
 function ministeckPiece(type,color)
-{
+{	//initiliaze piece
 	this.type = type;
 	this.color = color;
 }

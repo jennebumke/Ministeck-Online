@@ -1,5 +1,5 @@
 function ministeckColor(r,g,b)
-{
+{	//function called to obtain color
 	this.r = r;
 	this.g = g;
 	this.b = b;
